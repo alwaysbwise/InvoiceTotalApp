@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">InvoiceTotalApp</string>
+    <string name="_10">10%</string>
+    <string name="_15_00">$15.00</string>
+    <string name="_135_00">$135.00</string>
+</resources>
