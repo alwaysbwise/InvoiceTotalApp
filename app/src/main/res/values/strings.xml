@@ -3,4 +3,8 @@
     <string name="_10">10%</string>
     <string name="_15_00">$15.00</string>
     <string name="_135_00">$135.00</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="discount_percent">Discount Percent</string>
+    <string name="discount_amount">Discount Amount</string>
+    <string name="total">Total</string>
 </resources>
