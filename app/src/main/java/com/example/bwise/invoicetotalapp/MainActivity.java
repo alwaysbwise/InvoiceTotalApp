@@ -1,6 +1,7 @@
 package com.example.bwise.invoicetotalapp;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.EditText;
@@ -18,6 +19,8 @@ public class MainActivity extends Activity
 
     private String subtotalString;
 
+    private SharedPreferences savedValues;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +32,28 @@ public class MainActivity extends Activity
         percenttextView = findViewById(R.id.percenttextView);
         discounttextView = findViewById(R.id.discounttextView);
         totaltextView = findViewById(R.id.totaltextView);
-
+        //listener
         inputeditText.setOnEditorActionListener(this);
+        savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
+    }
+
+    @Override
+    public void onPause(){
+        SharedPreferences.Editor editor = savedValues.edit();
+        editor.putString("subtotalString", subtotalString);
+        editor.commit();
+
+        super.onPause();
+    }
+
+    @Override
+    public void onResume(){
+        subtotalString = savedValues.getString("subtotalString", "");
+        inputeditText.setText(subtotalString);
+        calculateAndDisplay();
+
+        super.onResume();
+
     }
 
     @Override
@@ -72,7 +95,7 @@ public class MainActivity extends Activity
     NumberFormat currency = NumberFormat.getCurrencyInstance();
     discounttextView.setText(currency.format(discountAmount));
 
-    totaltextView. setText(currency.format(total));
+    totaltextView.setText(currency.format(total));
 
     }//end calculateAndDisplay method
 }
